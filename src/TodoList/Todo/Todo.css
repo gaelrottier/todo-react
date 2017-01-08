@@ -1,0 +1,20 @@
+.todo-title {
+    width: 450px;
+    display: inline-block;
+}
+
+.btn-check-todo {
+    float: right;
+    background: transparent;
+}
+
+.todo {
+    background: #fdd4be;
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 5px;
+    border-radius: 5px;
+    box-shadow: 3px 2px 2px #fdd4be;
+    width: 500px;
+}
