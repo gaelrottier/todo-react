@@ -33,4 +33,4 @@ export class TodoListContainer extends Component {
     }
 }
 
-module.exports = TodoListContainer;
+export default TodoListContainer;

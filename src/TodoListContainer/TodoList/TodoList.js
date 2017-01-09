@@ -64,4 +64,4 @@ export class TodoList extends Component {
     }
 }
 
-module.exports = TodoList;
+export default TodoList;

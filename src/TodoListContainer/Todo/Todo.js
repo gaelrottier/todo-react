@@ -41,4 +41,4 @@ export class Todo extends Component {
     }
 }
 
-module.exports = Todo;
+export default Todo;
