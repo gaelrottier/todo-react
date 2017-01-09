@@ -30,10 +30,8 @@ export class TodoList extends Component {
     }
 
     completeTask(todo) {
-        const todos = this.state.todos;
-
         todo.completed = true;
-        this.setState({todos,});
+        this.setState({todos: this.state.todos,});
     }
 
     render() {
