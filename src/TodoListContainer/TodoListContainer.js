@@ -6,6 +6,7 @@ export class TodoListContainer extends Component {
     constructor() {
         super();
         this.countTachesRestantes = this.countTachesRestantes.bind(this);
+        this.addTodo = this.addTodo.bind(this);
 
         this.state = {
             nbTachesRestantes: 0
@@ -13,15 +14,20 @@ export class TodoListContainer extends Component {
     }
 
     countTachesRestantes(todos) {
-        const tachesRestantes = todos.filter(todo => !todo.completed).length;
-        this.setState({nbTachesRestantes: tachesRestantes});
+        const nbTachesRestantes = todos.filter(todo => !todo.completed).length;
+        this.setState({nbTachesRestantes});
+    }
+
+    addTodo(){
+        this.refs.todoList.addTodo();
     }
 
     render() {
         return (
             <section>
                 <h2>Nombre de t&acirc;ches restantes : {this.state.nbTachesRestantes}</h2>
-                <TodoList onUpdate={this.countTachesRestantes}/>
+                <button onClick={this.addTodo}>Ajouter un TODO</button>
+                <TodoList ref="todoList" onUpdate={this.countTachesRestantes}/>
             </section>
         );
     }
