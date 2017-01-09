@@ -5,6 +5,7 @@ export class Todo extends Component {
     constructor(props) {
         super(props);
         this.handleClick = this.handleClick.bind(this);
+        this.updateStyle = this.updateStyle.bind(this);
 
         this.state = {
             style: {
