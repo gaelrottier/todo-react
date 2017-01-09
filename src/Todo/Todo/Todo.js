@@ -17,17 +17,13 @@ export class Todo extends Component {
         this.props.completeTask(this.props.todo);
     }
 
-    shouldComponentUpdate() {
-        return !!this.props.todo.completed;
-    }
+    updateStyle() {
+        const style = this.state.style;
+        const newStyle = {style};
 
-    componentWillUpdate() {
-        if (this.state.style.textDecoration === 'none') {
-            const style = this.state.style;
-            const newStyle = {style};
-            newStyle.textDecoration = 'line-through';
-            this.setState({style: newStyle});
-        }
+        newStyle.textDecoration = this.props.todo.completed ? 'line-through' : 'none';
+
+        this.setState({style: newStyle});
     }
 
     render() {

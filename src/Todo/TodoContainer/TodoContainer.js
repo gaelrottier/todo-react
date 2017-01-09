@@ -15,12 +15,13 @@ export class TodoContainer extends Component {
     completeTask(todo) {
         todo.completed = true;
         this.props.onUpdate(this.props.todos);
+        this.refs.todo.updateStyle();
     }
 
     render() {
         const todo = this.props.todo;
 
-        return <Todo key={'todo_' + todo.id} todo={todo} completeTask={this.completeTask}/>;
+        return <Todo key={'todo_' + todo.id} ref="todo" todo={todo} completeTask={this.completeTask}/>;
     }
 }
 
