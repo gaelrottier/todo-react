@@ -9,17 +9,16 @@ export class Todo extends Component {
         this.state = {
             style: {
                 textDecoration: props.todo.completed ? 'line-through' : 'none'
-            },
-            todo: props.todo
+            }
         };
     }
 
     handleClick() {
-        this.props.completeTask(this.state.todo);
+        this.props.completeTask(this.props.todo);
     }
 
     shouldComponentUpdate() {
-        return !!this.state.todo.completed;
+        return !!this.props.todo.completed;
     }
 
     componentWillUpdate() {
@@ -32,7 +31,7 @@ export class Todo extends Component {
     }
 
     render() {
-        const todo = this.state.todo;
+        const todo = this.props.todo;
 
         return (
             <article className="todo">
