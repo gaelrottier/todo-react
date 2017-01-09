@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import "./TodoListContainer.css";
-import Todo from './Todo/Todo';
+import Todo from "./Todo/Todo";
 
 export class TodoList extends Component {
     constructor(props) {
@@ -25,25 +25,27 @@ export class TodoList extends Component {
                     title: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ullamcorper vestibulum mauris. Sed ut tristique leo. Sed cons",
                     completed: true
                 }
-            ],
-            nb: 2
+            ]
         }
     }
 
-    completeTask() {
-        this.setState({nb: this.state.nb - 1});
+    completeTask(todo) {
+        const todos = this.state.todos;
+
+        todo.completed = true;
+        this.setState({todos,});
     }
 
     render() {
-        const todoList = this.state.todos.map((todo) =>
-            (
-                <Todo key={'todo_' + todo.id} todo={todo} onClick={this.completeTask}/>
-            )
+        const tachesRestantes = this.state.todos.filter(todo => !todo.completed).length;
+
+        const todoList = this.state.todos.map(todo =>
+            <Todo key={'todo_' + todo.id} todo={todo} onClick={this.completeTask}/>
         );
 
         return (
             <section className="todo-list">
-                <h2 id="taches-restantes">Nombre de t&acirc;ches restantes : {this.state.nb}</h2>
+                <h2 id="taches-restantes">Nombre de t&acirc;ches restantes : {tachesRestantes}</h2>
                 {todoList}
             </section>
         );
