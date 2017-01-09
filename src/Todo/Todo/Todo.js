@@ -9,28 +9,30 @@ export class Todo extends Component {
         this.state = {
             style: {
                 textDecoration: props.todo.completed ? 'line-through' : 'none'
-            }
+            },
+            todo: props.todo
         };
     }
 
     handleClick() {
-        this.props.onClick(this.props.todo);
+        this.props.completeTask(this.state.todo);
     }
 
     shouldComponentUpdate() {
-        return !!this.props.todo.completed;
+        return !!this.state.todo.completed;
     }
 
     componentWillUpdate() {
         if (this.state.style.textDecoration === 'none') {
             const style = this.state.style;
-            style.textDecoration = 'line-through';
-            this.setState({style,});
+            const newStyle = {style};
+            newStyle.textDecoration = 'line-through';
+            this.setState({style: newStyle});
         }
     }
 
     render() {
-        const todo = this.props.todo;
+        const todo = this.state.todo;
 
         return (
             <article className="todo">

@@ -1,11 +1,11 @@
 import React, {Component} from "react";
-// import "./TodoListContainer.css";
-import Todo from "../Todo/Todo";
+import "./TodoListContainer.css";
+import TodoList from "../TodoList/TodoList";
 
-export class TodoList extends Component {
-    constructor(props) {
-        super(props);
-        this.completeTask = this.completeTask.bind(this);
+export class TodoListContainer extends Component {
+    constructor() {
+        super();
+        this.countTachesRestantes = this.countTachesRestantes.bind(this);
         this.addTodo = this.addTodo.bind(this);
 
         this.state = {
@@ -25,18 +25,14 @@ export class TodoList extends Component {
                     title: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ullamcorper vestibulum mauris. Sed ut tristique leo. Sed cons",
                     completed: true
                 }
-            ]
+            ],
+            nbTachesRestantes: 0
         };
     }
 
-    componentDidMount() {
-        this.props.onUpdate(this.state.todos);
-    }
-
-    completeTask(todo) {
-        todo.completed = true;
-        this.setState({todos: this.state.todos});
-        this.props.onUpdate(this.state.todos);
+    countTachesRestantes() {
+        const nbTachesRestantes = this.state.todos.filter(todo => !todo.completed).length;
+        this.setState({nbTachesRestantes});
     }
 
     addTodo() {
@@ -48,20 +44,18 @@ export class TodoList extends Component {
         };
 
         this.setState({todos});
-        this.props.onUpdate(this.state.todos);
+        this.countTachesRestantes();
     }
 
     render() {
-        const todosJsx = this.state.todos.map(todo =>
-            <Todo key={'todo_' + todo.id} todo={todo} onClick={this.completeTask}/>
-        );
-
         return (
-            <section className="todo-list">
-                {todosJsx}
+            <section>
+                <h2>Nombre de t&acirc;ches restantes : {this.state.nbTachesRestantes}</h2>
+                <button onClick={this.addTodo}>Ajouter un TODO</button>
+                <TodoList todos={this.state.todos} onUpdate={this.countTachesRestantes}/>
             </section>
-        )
+        );
     }
 }
 
-export default TodoList;
+export default TodoListContainer;
