@@ -6,20 +6,30 @@ export class TodoContainer extends Component {
         super(props);
         this.completeTask = this.completeTask.bind(this);
         this.onTextUpdate = this.onTextUpdate.bind(this);
+
+        this.state = {todo: props.todo};
     }
 
     componentDidMount() {
-        this.props.onUpdate();
+        this.props.onUpdate(this.state.todo);
     }
 
-    completeTask(todo) {
+    completeTask() {
+        const todo = this.state.todo;
+
         todo.completed = true;
-        this.props.onUpdate();
+        this.setState({todo});
+
         this.refs.todo.updateStyle();
+        this.props.onUpdate(todo);
     }
 
-    onTextUpdate(todo, newTitle) {
-        this.props.onTextUpdate(todo, newTitle);
+    onTextUpdate(newTitle) {
+        const todo = this.state.todo;
+
+        todo.title = newTitle;
+        this.setState({todo});
+        this.props.onUpdate(todo);
     }
 
     render() {

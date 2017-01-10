@@ -37,16 +37,15 @@ export class Todo extends Component {
         this.setState({editing: !this.state.editing});
     }
 
-    onBlur(){
-        this.props.onTextUpdate(this.props.todo, this.state.title);
+    onBlur() {
+        this.props.onTextUpdate(this.state.title);
         this.setState({editing: false});
     }
 
-    onChange(e){
-        this.props.onTextUpdate(this.props.todo, e.target.value);
+    onChange(e) {
+        this.props.onTextUpdate(e.target.value);
         this.setState({title: e.target.value});
     }
-
 
     render() {
         const todo = this.props.todo;
@@ -56,7 +55,12 @@ export class Todo extends Component {
                 {!this.state.editing &&
                 <span className="todo-title" onClick={this.editTodo} style={this.state.style}>{todo.title}</span>}
                 {this.state.editing &&
-                <input type="text" className="todo-title" value={this.state.title} onBlur={this.onBlur} onChange={this.onChange} style={this.state.style}/>}
+                <input type="text"
+                       className="todo-title"
+                       value={this.state.title}
+                       onBlur={this.onBlur}
+                       onChange={this.onChange}
+                       style={this.state.style}/>}
                 <button className="btn-check-todo" onClick={this.handleClick}>Finir</button>
             </article>
         );

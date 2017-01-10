@@ -6,7 +6,6 @@ export class TodoListContainer extends Component {
     constructor() {
         super();
         this.onUpdate = this.onUpdate.bind(this);
-        this.onTextUpdate = this.onTextUpdate.bind(this);
         this.addTodo = this.addTodo.bind(this);
 
         this.state = {
@@ -31,21 +30,23 @@ export class TodoListContainer extends Component {
         };
     }
 
-    onUpdate() {
-        const nbTachesRestantes = this.state.todos.filter(todo => !todo.completed).length;
-        this.setState({nbTachesRestantes});
-    }
+    onUpdate(newTodo) {
+        const todos = this.state.todos;
+        const todo = todos.find(todoFind => todoFind.id === newTodo.id);
 
-    onTextUpdate(todo, newTitle){
-        todo.title = newTitle;
-        this.setState({todos: this.state.todos});
+        todo.title = newTodo.title;
+        todo.completed = newTodo.completed;
+
+        const nbTachesRestantes = this.state.todos.filter(todoFilter => !todoFilter.completed).length;
+
+        this.setState({todos, nbTachesRestantes});
     }
 
     addTodo() {
         const todos = this.state.todos;
         todos[todos.length] = {
             id: todos.length,
-            title: '',
+            title: 'Title goes here',
             completed: false
         };
 
@@ -58,7 +59,7 @@ export class TodoListContainer extends Component {
             <section>
                 <h2>Nombre de t&acirc;ches restantes : {this.state.nbTachesRestantes}</h2>
                 <button onClick={this.addTodo}>Ajouter un TODO</button>
-                <TodoList todos={this.state.todos} onUpdate={this.onUpdate} onTextUpdate={this.onTextUpdate}/>
+                <TodoList todos={this.state.todos} onUpdate={this.onUpdate}/>
             </section>
         );
     }
