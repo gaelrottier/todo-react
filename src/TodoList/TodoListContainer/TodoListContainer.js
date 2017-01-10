@@ -5,7 +5,8 @@ import TodoList from "../TodoList/TodoList";
 export class TodoListContainer extends Component {
     constructor() {
         super();
-        this.countTachesRestantes = this.countTachesRestantes.bind(this);
+        this.onUpdate = this.onUpdate.bind(this);
+        this.onTextUpdate = this.onTextUpdate.bind(this);
         this.addTodo = this.addTodo.bind(this);
 
         this.state = {
@@ -30,9 +31,14 @@ export class TodoListContainer extends Component {
         };
     }
 
-    countTachesRestantes() {
+    onUpdate() {
         const nbTachesRestantes = this.state.todos.filter(todo => !todo.completed).length;
         this.setState({nbTachesRestantes});
+    }
+
+    onTextUpdate(todo, newTitle){
+        todo.title = newTitle;
+        this.setState({todos: this.state.todos});
     }
 
     addTodo() {
@@ -44,7 +50,7 @@ export class TodoListContainer extends Component {
         };
 
         this.setState({todos});
-        this.countTachesRestantes();
+        this.onUpdate();
     }
 
     render() {
@@ -52,7 +58,7 @@ export class TodoListContainer extends Component {
             <section>
                 <h2>Nombre de t&acirc;ches restantes : {this.state.nbTachesRestantes}</h2>
                 <button onClick={this.addTodo}>Ajouter un TODO</button>
-                <TodoList todos={this.state.todos} onUpdate={this.countTachesRestantes}/>
+                <TodoList todos={this.state.todos} onUpdate={this.onUpdate} onTextUpdate={this.onTextUpdate}/>
             </section>
         );
     }

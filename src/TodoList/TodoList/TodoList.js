@@ -10,6 +10,7 @@ export class TodoList extends Component {
                 todo={todo}
                 onClick={this.props.completeTask}
                 onUpdate={this.props.onUpdate}
+                onTextUpdate={this.props.onTextUpdate}
             />
         );
 
