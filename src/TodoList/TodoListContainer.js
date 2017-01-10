@@ -1,6 +1,6 @@
 import React, {Component} from "react";
-import "./TodoListContainer.css";
-import TodoList from "../TodoList/TodoList";
+import "./TodoList.css";
+import TodoList from "./TodoList";
 
 export class TodoListContainer extends Component {
     constructor() {
