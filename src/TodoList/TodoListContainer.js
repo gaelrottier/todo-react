@@ -37,9 +37,11 @@ export class TodoListContainer extends Component {
         todo.title = newTodo.title;
         todo.completed = newTodo.completed;
 
+        this.setState({todos});
+
         const nbTachesRestantes = this.state.todos.filter(todoFilter => !todoFilter.completed).length;
 
-        this.setState({todos, nbTachesRestantes});
+        this.setState({nbTachesRestantes});
     }
 
     addTodo() {
