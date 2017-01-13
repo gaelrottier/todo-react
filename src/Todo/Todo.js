@@ -4,7 +4,6 @@ import "./Todo.css";
 export class Todo extends Component {
     constructor(props) {
         super(props);
-        this.onChange = this.onChange.bind(this);
         this.onBlur = this.onBlur.bind(this);
 
         this.state = {
@@ -12,10 +11,6 @@ export class Todo extends Component {
                 textDecoration: props.todo.completed ? 'line-through' : 'none'
             }
         };
-    }
-
-    onChange(e) {
-        this.props.onTextUpdate(e.target.value);
     }
 
     onBlur() {
@@ -34,7 +29,7 @@ export class Todo extends Component {
                        className="todo-title"
                        value={this.props.todo.title}
                        onBlur={this.onBlur}
-                       onChange={this.onChange}
+                       onChange={(e) => this.props.onTextUpdate(e.target.value)}
                        onClick={() => this.setState({style: {textDecoration: 'none'}})}
                        style={this.state.style}/>
             </article>
