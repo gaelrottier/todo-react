@@ -26,8 +26,8 @@ export class Todo extends Component {
         return (
             <article className="todo">
                 <input type="text"
-                       className="todo-title"
-                       value={this.props.todo.title}
+                       className="todo-content"
+                       value={this.props.todo.content}
                        onBlur={this.onBlur}
                        onChange={(e) => this.props.onTextUpdate(e.target.value)}
                        onClick={() => this.setState({style: {textDecoration: 'none'}})}

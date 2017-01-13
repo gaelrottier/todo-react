@@ -24,10 +24,10 @@ export class TodoContainer extends Component {
         this.props.onUpdate(todo);
     }
 
-    onTextUpdate(newTitle) {
+    onTextUpdate(newContent) {
         const todo = this.state.todo;
 
-        todo.title = newTitle;
+        todo.content = newContent;
         this.setState({todo});
         this.props.onUpdate(todo);
     }

@@ -12,17 +12,17 @@ export class TodoListContainer extends Component {
             todos: [
                 {
                     id: 0,
-                    title: "Nettoyer le réacteur",
+                    content: "Nettoyer le réacteur",
                     completed: false,
                 },
                 {
                     id: 1,
-                    title: "Cacher le corps",
+                    content: "Cacher le corps",
                     completed: false
                 },
                 {
                     id: 2,
-                    title: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ullamcorper vestibulum mauris. Sed ut tristique leo. Sed cons",
+                    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ullamcorper vestibulum mauris. Sed ut tristique leo. Sed cons",
                     completed: true
                 }
             ],
@@ -34,7 +34,7 @@ export class TodoListContainer extends Component {
         const todos = this.state.todos;
         const todo = todos.find(todoFind => todoFind.id === newTodo.id);
 
-        todo.title = newTodo.title;
+        todo.content = newTodo.content;
         todo.completed = newTodo.completed;
 
         this.setState({todos});
@@ -48,7 +48,7 @@ export class TodoListContainer extends Component {
         const todos = this.state.todos;
         todos[todos.length] = {
             id: todos.length,
-            title: 'Title goes here',
+            content: 'Title goes here',
             completed: false
         };
 
