@@ -13,6 +13,15 @@ export class Todo extends Component {
         };
     }
 
+    static propTypes = {
+        todo: React.PropTypes.shape({
+            id: React.PropTypes.number.isRequired,
+            content: React.PropTypes.string.isRequired,
+            completed: React.PropTypes.bool.isRequired
+        }),
+        onTextUpdate: React.PropTypes.func.isRequired // parameters : (newContent: string)
+    };
+
     onBlur() {
         const style = this.state.style;
         const newStyle = {style};
