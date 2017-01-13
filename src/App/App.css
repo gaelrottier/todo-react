@@ -26,11 +26,18 @@
 .center{
   margin-left: auto;
   margin-right: auto;
-  width: 500px;
+  width: calc(100% / 3);
 } 
 
 #main-title{
   font-size: 2em;
   text-align: center;
   color: #330d05;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #bc8b69;
+  font-family: 'pastelRegular', monospace;
 }
