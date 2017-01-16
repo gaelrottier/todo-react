@@ -7,6 +7,15 @@ export class TodoContainer extends Component {
         this.completeTask = this.completeTask.bind(this);
     }
 
+    static propTypes = {
+        todo: React.PropTypes.shape({
+            id: React.PropTypes.number.isRequired,
+            content: React.PropTypes.string.isRequired,
+            completed: React.PropTypes.bool.isRequired
+        }),
+        onTextUpdate: React.PropTypes.func.isRequired // parameters : (id: int, newContent: string)
+    };
+
     completeTask() {
         const todo = this.state.todo;
 
