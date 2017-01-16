@@ -5,13 +5,8 @@ export class TodoContainer extends Component {
     constructor(props) {
         super(props);
         this.completeTask = this.completeTask.bind(this);
-        this.onTextUpdate = this.onTextUpdate.bind(this);
 
         this.state = {todo: props.todo};
-    }
-
-    componentDidMount() {
-        this.props.onUpdate(this.state.todo);
     }
 
     completeTask() {
@@ -20,15 +15,6 @@ export class TodoContainer extends Component {
         todo.completed = true;
         this.setState({todo});
 
-        this.refs.todo.updateStyle();
-        this.props.onUpdate(todo);
-    }
-
-    onTextUpdate(newContent) {
-        const todo = this.state.todo;
-
-        todo.content = newContent;
-        this.setState({todo});
         this.props.onUpdate(todo);
     }
 
@@ -37,9 +23,8 @@ export class TodoContainer extends Component {
 
         return <Todo
             key={'todo_' + todo.id}
-            ref="todo"
             todo={todo}
-            onTextUpdate={this.onTextUpdate}
+            onTextUpdate={newContent => this.props.onTextUpdate(newContent)}
             completeTask={this.completeTask}/>;
     }
 }

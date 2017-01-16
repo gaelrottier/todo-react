@@ -1,6 +1,6 @@
 import React, {Component} from "react";
-import "./TodoList.css";
 import TodoList from "./TodoList";
+import TodoContainer from "../Todo/TodoContainer";
 
 export class TodoListContainer extends Component {
     constructor() {
@@ -30,7 +30,7 @@ export class TodoListContainer extends Component {
         };
     }
 
-    onUpdate(newTodo) {
+    onTodoUpdate(newTodo) {
         const todos = this.state.todos;
         const todo = todos.find(todoFind => todoFind.id === newTodo.id);
 
@@ -39,6 +39,10 @@ export class TodoListContainer extends Component {
 
         this.setState({todos});
 
+        this.onUpdate();
+    }
+
+    onUpdate() {
         const nbTachesRestantes = this.state.todos.filter(todoFilter => !todoFilter.completed).length;
 
         this.setState({nbTachesRestantes});
@@ -60,8 +64,7 @@ export class TodoListContainer extends Component {
         return (
             <section>
                 <h2>Nombre de t&acirc;ches restantes : {this.state.nbTachesRestantes}</h2>
-                <button onClick={this.addTodo}>Ajouter un TODO</button>
-                <TodoList todos={this.state.todos} onUpdate={this.onUpdate}/>
+                <TodoList todos={this.state.todos} onUpdate={this.onTodoUpdate}/>
             </section>
         );
     }
