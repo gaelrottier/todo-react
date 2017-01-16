@@ -5,8 +5,6 @@ export class TodoContainer extends Component {
     constructor(props) {
         super(props);
         this.completeTask = this.completeTask.bind(this);
-
-        this.state = {todo: props.todo};
     }
 
     completeTask() {
@@ -15,7 +13,7 @@ export class TodoContainer extends Component {
         todo.completed = true;
         this.setState({todo});
 
-        this.props.onUpdate(todo);
+        this.props.countTachesRestantes(todo);
     }
 
     render() {
@@ -24,7 +22,7 @@ export class TodoContainer extends Component {
         return <Todo
             key={'todo_' + todo.id}
             todo={todo}
-            onTextUpdate={newContent => this.props.onTextUpdate(newContent)}
+            onTextUpdate={this.props.onTextUpdate}
             completeTask={this.completeTask}/>;
     }
 }

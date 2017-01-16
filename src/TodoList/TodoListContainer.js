@@ -1,12 +1,13 @@
 import React, {Component} from "react";
 import TodoList from "./TodoList";
-import TodoContainer from "../Todo/TodoContainer";
 
 export class TodoListContainer extends Component {
     constructor() {
         super();
-        this.onUpdate = this.onUpdate.bind(this);
+        this.countTachesRestantes = this.countTachesRestantes.bind(this);
         this.addTodo = this.addTodo.bind(this);
+        this.onTodoUpdate = this.onTodoUpdate.bind(this);
+        this.onTextUpdate = this.onTextUpdate.bind(this);
 
         this.state = {
             todos: [
@@ -39,10 +40,19 @@ export class TodoListContainer extends Component {
 
         this.setState({todos});
 
-        this.onUpdate();
+        this.countTachesRestantes();
     }
 
-    onUpdate() {
+    onTextUpdate(id, newContent) {
+        const todos = this.state.todos;
+        const todo = todos.find(todoFind => todoFind.id === id);
+
+        todo.content = newContent;
+
+        this.setState({todos});
+    }
+
+    countTachesRestantes() {
         const nbTachesRestantes = this.state.todos.filter(todoFilter => !todoFilter.completed).length;
 
         this.setState({nbTachesRestantes});
@@ -57,14 +67,14 @@ export class TodoListContainer extends Component {
         };
 
         this.setState({todos});
-        this.onUpdate();
+        this.countTachesRestantes();
     }
 
     render() {
         return (
             <section>
                 <h2>Nombre de t&acirc;ches restantes : {this.state.nbTachesRestantes}</h2>
-                <TodoList todos={this.state.todos} onUpdate={this.onTodoUpdate}/>
+                <TodoList todos={this.state.todos} onTextUpdate={this.onTextUpdate}/>
             </section>
         );
     }

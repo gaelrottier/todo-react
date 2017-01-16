@@ -8,7 +8,7 @@ export class TodoList extends Component {
             <TodoContainer
                 key={'todo_' + todo.id}
                 todo={todo}
-                onUpdate={this.props.onUpdate}
+                onTextUpdate={this.props.onTextUpdate}
             />
         );
 

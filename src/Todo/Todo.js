@@ -19,7 +19,7 @@ export class Todo extends Component {
             content: React.PropTypes.string.isRequired,
             completed: React.PropTypes.bool.isRequired
         }),
-        onTextUpdate: React.PropTypes.func.isRequired // parameters : (newContent: string)
+        onTextUpdate: React.PropTypes.func.isRequired // parameters : (id: int, newContent: string)
     };
 
     onBlur() {
@@ -32,13 +32,15 @@ export class Todo extends Component {
     }
 
     render() {
+        const todo = this.props.todo;
+
         return (
             <article className="todo">
                 <input type="text"
                        className="todo-content"
-                       value={this.props.todo.content}
+                       value={todo.content}
                        onBlur={this.onBlur}
-                       onChange={(e) => this.props.onTextUpdate(e.target.value)}
+                       onChange={e => this.props.onTextUpdate(todo.id, e.target.value)}
                        onClick={() => this.setState({style: {textDecoration: 'none'}})}
                        style={this.state.style}/>
             </article>
