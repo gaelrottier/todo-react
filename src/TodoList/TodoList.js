@@ -1,6 +1,5 @@
 import React, {Component} from "react";
-// import "./TodoListContainer.css";
-import TodoContainer from '../Todo/TodoContainer';
+import Todo from '../Todo/Todo';
 
 export class TodoList extends Component {
     static propTypes = {
@@ -9,16 +8,17 @@ export class TodoList extends Component {
             content: React.PropTypes.string.isRequired,
             completed: React.PropTypes.bool.isRequired
         })),
-        onTextUpdate: React.PropTypes.func.isRequired // parameters : (id: int, newContent: string)
+        onTextUpdate: React.PropTypes.func.isRequired, // parameters : (id: int, newContent: string)
+        onComplete: React.PropTypes.func.isRequired // parameters : (id: int, completed: boolean)
     };
 
     render() {
         const todosJsx = this.props.todos.map(todo =>
-            <TodoContainer
+            <Todo
                 key={'todo_' + todo.id}
                 todo={todo}
                 onTextUpdate={this.props.onTextUpdate}
-            />
+                onComplete={this.props.onComplete}/>
         );
 
         return (

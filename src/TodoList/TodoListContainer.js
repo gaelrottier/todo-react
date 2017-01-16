@@ -6,7 +6,7 @@ export class TodoListContainer extends Component {
         super();
         this.countTachesRestantes = this.countTachesRestantes.bind(this);
         this.addTodo = this.addTodo.bind(this);
-        this.onTodoUpdate = this.onTodoUpdate.bind(this);
+        this.onComplete = this.onComplete.bind(this);
         this.onTextUpdate = this.onTextUpdate.bind(this);
 
         this.state = {
@@ -31,16 +31,19 @@ export class TodoListContainer extends Component {
         };
     }
 
-    onTodoUpdate(newTodo) {
-        const todos = this.state.todos;
-        const todo = todos.find(todoFind => todoFind.id === newTodo.id);
+    componentDidMount(){
+        this.countTachesRestantes();
+    }
 
-        todo.content = newTodo.content;
-        todo.completed = newTodo.completed;
+    onComplete(id, completed) {
+        const todos = this.state.todos;
+        const todo = todos.find(todo => todo.id === id);
+
+        todo.completed = completed;
 
         this.setState({todos});
 
-        this.countTachesRestantes();
+      this.countTachesRestantes();
     }
 
     onTextUpdate(id, newContent) {
@@ -74,7 +77,7 @@ export class TodoListContainer extends Component {
         return (
             <section>
                 <h2>Nombre de t&acirc;ches restantes : {this.state.nbTachesRestantes}</h2>
-                <TodoList todos={this.state.todos} onTextUpdate={this.onTextUpdate}/>
+                <TodoList todos={this.state.todos} onTextUpdate={this.onTextUpdate} onComplete={this.onComplete}/>
             </section>
         );
     }
