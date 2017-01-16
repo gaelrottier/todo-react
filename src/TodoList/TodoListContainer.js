@@ -45,7 +45,7 @@ export class TodoListContainer extends Component {
 
     onTextUpdate(id, newContent) {
         const todos = this.state.todos;
-        const todo = todos.find(todoFind => todoFind.id === id);
+        const todo = todos.find(todo => todo.id === id);
 
         todo.content = newContent;
 
@@ -53,7 +53,7 @@ export class TodoListContainer extends Component {
     }
 
     countTachesRestantes() {
-        const nbTachesRestantes = this.state.todos.filter(todoFilter => !todoFilter.completed).length;
+        const nbTachesRestantes = this.state.todos.filter(todo => !todo.completed).length;
 
         this.setState({nbTachesRestantes});
     }
