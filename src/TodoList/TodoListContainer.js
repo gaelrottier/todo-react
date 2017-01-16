@@ -60,11 +60,11 @@ export class TodoListContainer extends Component {
 
     addTodo() {
         const todos = this.state.todos;
-        todos[todos.length] = {
-            id: todos.length,
+        todos.concat({
+            id: todos[todos.length - 1].id + 1,
             content: 'Title goes here',
             completed: false
-        };
+        });
 
         this.setState({todos});
         this.countTachesRestantes();
